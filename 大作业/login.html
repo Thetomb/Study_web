@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智学通 - 登录</title>
+    <script src="js/theme.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="nav" id="navbar">
+        <div class="container nav-content">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">🎓</div>
+                <span>智学通</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="chat.html">对话</a></li>
+                <li><a href="faq.html">常见问题</a></li>
+                <li><a href="mental-health.html">心理支持</a></li>
+                <li><a href="about.html">关于</a></li>
+            </ul>
+            <div class="burger-menu" id="burgerMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="auth-page" id="authPage">
+        <div class="auth-card">
+            <div class="auth-brand">
+                <div class="logo-icon">🎓</div>
+                <h1>欢迎使用智学通</h1>
+                <p>登录后即可使用 AI 学业伙伴的全部功能</p>
+            </div>
+
+            <div class="auth-tabs">
+                <button class="auth-tab active" data-target="login">登录</button>
+                <button class="auth-tab" data-target="register">注册</button>
+            </div>
+
+            <div class="auth-message" id="authMessage" style="display:none;"></div>
+
+            <form class="auth-form active" id="loginForm" autocomplete="off">
+                <div class="form-group">
+                    <label for="loginUsername">用户名</label>
+                    <input type="text" id="loginUsername" placeholder="请输入用户名" required>
+                </div>
+                <div class="form-group">
+                    <label for="loginPassword">密码</label>
+                    <input type="password" id="loginPassword" placeholder="请输入密码" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg auth-submit">登录</button>
+            </form>
+
+            <form class="auth-form" id="registerForm" autocomplete="off">
+                <div class="form-group">
+                    <label for="registerUsername">用户名</label>
+                    <input type="text" id="registerUsername" placeholder="2 个字符以上" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerNickname">昵称（可选）</label>
+                    <input type="text" id="registerNickname" placeholder="展示用的名字，留空则用用户名">
+                </div>
+                <div class="form-group">
+                    <label for="registerPassword">密码</label>
+                    <input type="password" id="registerPassword" placeholder="至少 6 位" required>
+                </div>
+                <div class="form-group">
+                    <label for="registerConfirm">确认密码</label>
+                    <input type="password" id="registerConfirm" placeholder="再次输入密码" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg auth-submit">注册并登录</button>
+            </form>
+
+            <p class="auth-hint">提示：账号信息仅保存在本地浏览器，用于演示登录功能。</p>
+        </div>
+    </main>
+
+    <script src="js/api-config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智学通 - 对话</title>
+    <script src="js/theme.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="nav" id="navbar">
+        <div class="container nav-content">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">🎓</div>
+                <span>智学通</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="chat.html" class="active">对话</a></li>
+                <li><a href="faq.html">常见问题</a></li>
+                <li><a href="mental-health.html">心理支持</a></li>
+                <li><a href="about.html">关于</a></li>
+            </ul>
+            <div class="burger-menu" id="burgerMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="chat-container">
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <h3>智能体面板</h3>
+                <button class="collapse-btn" id="collapseBtn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+            <div class="scenario-menu">
+                <div class="scenario-item active" onclick="selectScenario('学业问答')">
+                    <div class="scenario-icon">📚</div>
+                    <span class="scenario-text">学业问答</span>
+                </div>
+                <div class="scenario-item" onclick="selectScenario('规划生成')">
+                    <div class="scenario-icon">📋</div>
+                    <span class="scenario-text">规划生成</span>
+                </div>
+                <div class="scenario-item" onclick="selectScenario('资源推荐')">
+                    <div class="scenario-icon">🎯</div>
+                    <span class="scenario-text">资源推荐</span>
+                </div>
+                <div class="scenario-item" onclick="selectScenario('心理支持')">
+                    <div class="scenario-icon">❤️</div>
+                    <span class="scenario-text">心理支持</span>
+                </div>
+                <div class="scenario-item" onclick="selectScenario('升学定位')">
+                    <div class="scenario-icon">🎓</div>
+                    <span class="scenario-text">升学定位</span>
+                </div>
+                <div class="scenario-item" onclick="selectScenario('学伴小助手')">
+                    <div class="scenario-icon">🔔</div>
+                    <span class="scenario-text">学伴小助手</span>
+                </div>
+            </div>
+            <div class="sidebar-input">
+                <input type="text" placeholder="自定义提问..." id="sidebarInput" onkeypress="handleSidebarInput(event)">
+            </div>
+        </aside>
+
+        <main class="chat-main">
+            <header class="chat-header">
+                <div class="chat-bot-info">
+                    <div class="chat-bot-avatar">📚</div>
+                    <div>
+                        <div class="chat-bot-name" id="chatBotName">学业问答</div>
+                        <div class="chat-bot-status" id="chatBotStatus">连接中...</div>
+                    </div>
+                </div>
+                <div class="chat-actions">
+                    <div class="chat-clock" id="chatClock">--:--:--</div>
+                    <button title="更换角色" id="switchCharBtn" onclick="toggleCharacterMenu()" style="display:none;">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </button>
+                    <button title="清空当前对话" onclick="confirmClearChat()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <polyline points="3 6 5 6 21 6"></polyline>
+                            <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                            <line x1="10" y1="11" x2="10" y2="17"></line>
+                            <line x1="14" y1="11" x2="14" y2="17"></line>
+                        </svg>
+                    </button>
+                    <button title="回到首页">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                        </svg>
+                    </button>
+                </div>
+                <!-- 角色切换下拉菜单 -->
+                <div class="character-menu" id="characterMenu" style="display:none;">
+                    <div class="character-menu-item" onclick="quickSwitchCharacter('warm')">
+                        <span class="char-icon">🌻</span>
+                        <span class="char-name">小暖</span>
+                        <span class="char-style">温暖鼓励</span>
+                    </div>
+                    <div class="character-menu-item" onclick="quickSwitchCharacter('rational')">
+                        <span class="char-icon">🦉</span>
+                        <span class="char-name">小智</span>
+                        <span class="char-style">理性分析</span>
+                    </div>
+                    <div class="character-menu-item" onclick="quickSwitchCharacter('humor')">
+                        <span class="char-icon">🐱</span>
+                        <span class="char-name">小喵</span>
+                        <span class="char-style">幽默轻松</span>
+                    </div>
+                    <div class="character-menu-item" onclick="quickSwitchCharacter('calm')">
+                        <span class="char-icon">🌙</span>
+                        <span class="char-name">小静</span>
+                        <span class="char-style">沉稳深度</span>
+                    </div>
+                    <div class="character-menu-divider"></div>
+                    <div class="character-menu-item" onclick="resetMentalCharacter()">
+                        <span class="char-icon">✨</span>
+                        <span class="char-name">自定义/更多</span>
+                    </div>
+                </div>
+            </header>
+
+            <div class="messages-container" id="messagesContainer">
+                <div class="risk-alert" id="riskAlert" style="display:none;">
+                    <span class="alert-icon">⚠️</span>
+                    <div class="alert-text" id="riskAlertText"></div>
+                    <button class="alert-action" onclick="handleAlertAction('查看')">点击查看</button>
+                </div>
+
+                <div class="message bot">
+                    <div class="message-avatar bot">📚</div>
+                    <div class="message-content">
+                        <div class="message-text">
+                            你好！我是学业问答助手，可以帮你解答课程知识、作业难题和考试重点。请问有什么学业问题？
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="input-area">
+                <div class="input-wrapper">
+                    <textarea id="messageInput" placeholder="请输入你的问题，或上传文件/图片..." rows="1"></textarea>
+                    <div class="file-preview" id="filePreview" style="display:none;"></div>
+                </div>
+                <div class="input-actions">
+                    <button title="上传文件/图片" onclick="document.getElementById('fileUpload').click()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21.44 11.05l-9.19 9.19a6 6 0 01-8.49-8.49l9.19-9.19a4 4 0 015.66 5.66l-9.2 9.19a2 2 0 01-2.83-2.83l8.49-8.48"/>
+                        </svg>
+                    </button>
+                    <button title="常用语" onclick="showQuickPhrases()">⚡</button>
+                    <input type="file" id="fileUpload" style="display:none;" accept="image/*,.pdf,.doc,.docx,.txt" onchange="handleFileUpload(event)">
+                </div>
+                <button class="send-btn" id="sendBtn" onclick="sendMessage()" disabled>发送</button>
+            </div>
+
+            <section class="plan-panel" id="planPanel">
+                <!-- 心理支持角色选择面板 -->
+                <div class="mental-character-panel" id="mentalCharacterPanel">
+                    <div class="plan-intro">
+                        <div class="plan-intro-icon">🌸</div>
+                        <h2>心灵花园</h2>
+                        <p>选择一位你喜欢的心理咨询师形象，或自定义专属陪伴者，开始温暖的对话之旅。</p>
+                    </div>
+
+                    <div class="character-presets" id="characterPresets">
+                        <div class="character-card" data-character="warm" onclick="selectMentalCharacter('warm')">
+                            <div class="character-avatar"></div>
+                            <div class="character-name">小暖</div>
+                            <div class="character-desc">温柔耐心的倾听者，像阳光一样温暖</div>
+                            <div class="character-tags">
+                                <span>温柔</span><span>共情</span><span>鼓励</span>
+                            </div>
+                        </div>
+                        <div class="character-card" data-character="rational" onclick="selectMentalCharacter('rational')">
+                            <div class="character-avatar">🦉</div>
+                            <div class="character-name">小智</div>
+                            <div class="character-desc">理性专业的分析师，帮你理清思路</div>
+                            <div class="character-tags">
+                                <span>理性</span><span>专业</span><span>分析</span>
+                            </div>
+                        </div>
+                        <div class="character-card" data-character="humor" onclick="selectMentalCharacter('humor')">
+                            <div class="character-avatar">🐱</div>
+                            <div class="character-name">小喵</div>
+                            <div class="character-desc">幽默风趣的小伙伴，用轻松方式化解烦恼</div>
+                            <div class="character-tags">
+                                <span>幽默</span><span>轻松</span><span>活泼</span>
+                            </div>
+                        </div>
+                        <div class="character-card" data-character="calm" onclick="selectMentalCharacter('calm')">
+                            <div class="character-avatar"></div>
+                            <div class="character-name">小静</div>
+                            <div class="character-desc">沉稳内敛的陪伴者，给你安静的力量</div>
+                            <div class="character-tags">
+                                <span>沉稳</span><span>内敛</span><span>深度</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="character-custom-toggle" onclick="toggleCustomCharacter()">
+                        <span>✨ 自定义形象</span>
+                        <svg class="toggle-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                        </svg>
+                    </div>
+
+                    <div class="character-custom-form" id="characterCustomForm" style="display:none;">
+                        <div class="form-group">
+                            <label>形象名称</label>
+                            <input type="text" id="customCharName" placeholder="例如：小星" maxlength="10">
+                        </div>
+                        <div class="form-group">
+                            <label>形象图标（emoji）</label>
+                            <input type="text" id="customCharIcon" placeholder="例如：⭐" maxlength="4">
+                        </div>
+                        <div class="form-group">
+                            <label>性格描述</label>
+                            <textarea id="customCharPersonality" rows="3" placeholder="例如：像一个知心大姐姐，说话温柔但有力量，擅长用比喻解释道理"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>沟通风格</label>
+                            <select id="customCharStyle">
+                                <option value="warm">温暖鼓励型</option>
+                                <option value="rational">理性分析型</option>
+                                <option value="humor">幽默轻松型</option>
+                                <option value="calm">沉稳深度型</option>
+                                <option value="custom">自定义（在性格描述中说明）</option>
+                            </select>
+                        </div>
+                        <button class="btn btn-primary btn-lg" onclick="confirmCustomCharacter()">确认选择</button>
+                    </div>
+                </div>
+
+                <!-- 升学定位四大板块面板 -->
+                <div class="education-panel" id="educationPanel" style="display:none;">
+                    <div class="plan-intro">
+                        <div class="plan-intro-icon">🎯</div>
+                        <h2>升学定位评估</h2>
+                        <p>描述你的个人信息和学业情况，AI 会基于毕业生就业数据，为你分析考研、就业、出国、考公四大路径的优劣势。</p>
+                    </div>
+
+                    <!-- 用户信息表单 -->
+                    <div class="edu-form" id="eduForm">
+                        <div class="edu-form-row">
+                            <div class="form-group">
+                                <label>专业</label>
+                                <input type="text" id="eduMajor" placeholder="如：计算机科学与技术">
+                            </div>
+                            <div class="form-group">
+                                <label>年级</label>
+                                <select id="eduGrade">
+                                    <option value="大一">大一</option>
+                                    <option value="大二">大二</option>
+                                    <option value="大三" selected>大三</option>
+                                    <option value="大四">大四</option>
+                                    <option value="研究生">研究生</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="edu-form-row">
+                            <div class="form-group">
+                                <label>GPA / 均分</label>
+                                <input type="text" id="eduGpa" placeholder="如：3.6/4.0 或 85/100">
+                            </div>
+                            <div class="form-group">
+                                <label>英语水平</label>
+                                <select id="eduEnglish">
+                                    <option value="四级">四级</option>
+                                    <option value="六级">六级</option>
+                                    <option value="雅思6.5+">雅思6.5+</option>
+                                    <option value="雅思7.0+">雅思7.0+</option>
+                                    <option value="托福90+">托福90+</option>
+                                    <option value="托福100+">托福100+</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>个人优势（竞赛/科研/实习/技能等）</label>
+                            <textarea id="eduStrengths" rows="2" placeholder="如：数学竞赛省奖、有项目经验、英语流利"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>个人劣势或困惑</label>
+                            <textarea id="eduWeaknesses" rows="2" placeholder="如：没有科研经历、不确定未来方向"></textarea>
+                        </div>
+                        <button class="btn btn-primary btn-lg" id="eduAnalyzeBtn" onclick="analyzeEducation()">开始评估</button>
+                    </div>
+
+                    <!-- 评估结果展示 -->
+                    <div class="edu-result" id="eduResult" style="display:none;">
+                        <div class="edu-result-header">
+                            <h2>四大路径评估</h2>
+                            <button class="btn btn-outline btn-sm" onclick="resetEducation()">重新评估</button>
+                        </div>
+
+                        <!-- 用户画像卡片 -->
+                        <div class="edu-profile-card" id="eduProfileCard"></div>
+
+                        <!-- 四大板块可视化 -->
+                        <div class="edu-cards-grid" id="eduCardsGrid">
+                            <div class="edu-card" data-path="kaoyan">
+                                <div class="edu-card-header">
+                                    <span class="edu-card-icon">📚</span>
+                                    <span class="edu-card-title">考研</span>
+                                    <span class="edu-card-score" id="kaoyanScore">--</span>
+                                </div>
+                                <div class="edu-card-body">
+                                    <div class="edu-bar-container">
+                                        <div class="edu-bar edu-bar-kaoyan" id="kaoyanBar" style="width:0%"></div>
+                                    </div>
+                                    <div class="edu-section">
+                                        <span class="edu-label edu-label-adv">优势</span>
+                                        <p class="edu-text" id="kaoyanAdv">--</p>
+                                    </div>
+                                    <div class="edu-section">
+                                        <span class="edu-label edu-label-dis">劣势</span>
+                                        <p class="edu-text" id="kaoyanDis">--</p>
+                                    </div>
+                                    <div class="edu-section">
+                                        <span class="edu-label">推荐</span>
+                                        <p class="edu-text" id="kaoyanRec">--</p>
+                                    </div>
+                                    <div class="edu-section">
+                                        <span class="edu-label">关键行动</span>
+                                        <ul class="edu-actions" id="kaoyanActions"></ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="edu-card" data-path="job">
+                                <div class="edu-card-header">
+                                    <span class="edu-card-icon">💼</span>
+                                    <span class="edu-card-title">就业</span>
+                                    <span class="edu-card-score" id="jobScore">--</span>
+                                </div>
+                                <div class="edu-card-body">
+                                    <div class="edu-bar-container">
+                                        <div class="edu-bar edu-bar-job" id="jobBar" style="width:0%"></div>
+                                    </div>
+                                    <div class="edu-section">
+                                        <span class="edu-label edu-label-adv">优势</span>
+                                        <p class="edu-text" id="jobAdv">--</p>
+                                    </div>
+                                    <div class="edu-section">
+                                        <span class="edu-label edu-label-dis">劣势</span>
+                                        <p class="edu-text" id="jobDis">--</p>
+                                    </div>
+                                    <div class="edu-section">
+                                        <span class="edu-label">推荐</span>
+                                        <p class="edu-text" id="jobRec">--</p>
+                                    </div>
+                                    <div class="edu-section">
+                                        <span class="edu-label">关键行动</span>
+                                        <ul class="edu-actions" id="jobActions"></ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="edu-card" data-path="abroad">
+                                <div class="edu-card-header">
+                                    <span class="edu-card-icon">✈️</span>
+                                    <span class="edu-card-title">出国</span>
+                                    <span class="edu-card-score" id="abroadScore">--</span>
+                                </div>
+                                <div class="edu-card-body">
+                                    <div class="edu-bar-container">
+                                        <div class="edu-bar edu-bar-abroad" id="abroadBar" style="width:0%"></div>
+                                    </div>
+                                    <div class="edu-section">
+                                        <span class="edu-label edu-label-adv">优势</span>
+                                        <p class="edu-text" id="abroadAdv">--</p>
+                                    </div>
+                                    <div class="edu-section">
+                                        <span class="edu-label edu-label-dis">劣势</span>
+                                        <p class="edu-text" id="abroadDis">--</p>
+                                    </div>
+                                    <div class="edu-section">
+                                        <span class="edu-label">推荐</span>
+                                        <p class="edu-text" id="abroadRec">--</p>
+                                    </div>
+                                    <div class="edu-section">
+                                        <span class="edu-label">关键行动</span>
+                                        <ul class="edu-actions" id="abroadActions"></ul>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="edu-card" data-path="civil">
+                                <div class="edu-card-header">
+                                    <span class="edu-card-icon">🏛️</span>
+                                    <span class="edu-card-title">考公</span>
+                                    <span class="edu-card-score" id="civilScore">--</span>
+                                </div>
+                                <div class="edu-card-body">
+                                    <div class="edu-bar-container">
+                                        <div class="edu-bar edu-bar-civil" id="civilBar" style="width:0%"></div>
+                                    </div>
+                                    <div class="edu-section">
+                                        <span class="edu-label edu-label-adv">优势</span>
+                                        <p class="edu-text" id="civilAdv">--</p>
+                                    </div>
+                                    <div class="edu-section">
+                                        <span class="edu-label edu-label-dis">劣势</span>
+                                        <p class="edu-text" id="civilDis">--</p>
+                                    </div>
+                                    <div class="edu-section">
+                                        <span class="edu-label">推荐</span>
+                                        <p class="edu-text" id="civilRec">--</p>
+                                    </div>
+                                    <div class="edu-section">
+                                        <span class="edu-label">关键行动</span>
+                                        <ul class="edu-actions" id="civilActions"></ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 学伴小助手面板 -->
+                <div class="assistant-panel" id="assistantPanel" style="display:none;">
+                    <div class="plan-intro">
+                        <div class="plan-intro-icon">🔔</div>
+                        <h2>学伴小助手</h2>
+                        <p>追踪毕业进度、管理备忘事项、智能提醒，让你的大学生活更有条理。</p>
+                    </div>
+
+                    <!-- Tab 切换 -->
+                    <div class="assistant-tabs">
+                        <button class="tab-btn active" data-tab="graduation" onclick="switchAssistantTab('graduation')">🎓 毕业进度</button>
+                        <button class="tab-btn" data-tab="memo" onclick="switchAssistantTab('memo')">📝 备忘录</button>
+                    </div>
+
+                    <!-- 毕业进度 Tab -->
+                    <div class="tab-content" id="tabGraduation">
+                        <!-- 个人信息表单 -->
+                        <div class="assistant-form" id="graduationForm">
+                            <h3> 填写个人信息</h3>
+                            <div class="edu-form-row">
+                                <div class="form-group">
+                                    <label>专业</label>
+                                    <input type="text" id="asstMajor" placeholder="如：计算机科学与技术">
+                                </div>
+                                <div class="form-group">
+                                    <label>年级</label>
+                                    <select id="asstGrade">
+                                        <option value="大一">大一</option>
+                                        <option value="大二">大二</option>
+                                        <option value="大三" selected>大三</option>
+                                        <option value="大四">大四</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="edu-form-row">
+                                <div class="form-group">
+                                    <label>已修学分</label>
+                                    <input type="number" id="asstCredits" placeholder="如：85" min="0">
+                                </div>
+                                <div class="form-group">
+                                    <label>素拓分</label>
+                                    <input type="number" id="asstSutuo" placeholder="如：12" min="0" step="0.5">
+                                </div>
+                            </div>
+                            <div class="edu-form-row">
+                                <div class="form-group">
+                                    <label>青志时长（小时）</label>
+                                    <input type="number" id="asstQingzhi" placeholder="如：30" min="0">
+                                </div>
+                                <div class="form-group">
+                                    <label>体测成绩</label>
+                                    <select id="asstTice">
+                                        <option value="优秀">优秀</option>
+                                        <option value="良好">良好</option>
+                                        <option value="及格">及格</option>
+                                        <option value="不及格">不及格</option>
+                                        <option value="未测">未测</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary btn-lg" onclick="analyzeGraduation()">分析毕业进度</button>
+                        </div>
+
+                        <!-- 毕业进度结果 -->
+                        <div class="graduation-result" id="graduationResult" style="display:none;">
+                            <div class="edu-result-header">
+                                <h2>🎓 毕业进度分析</h2>
+                                <button class="btn btn-outline btn-sm" onclick="resetGraduation()">重新分析</button>
+                            </div>
+                            <div class="edu-profile-card" id="graduationProfile"></div>
+                            <div class="graduation-bars" id="graduationBars"></div>
+                            <div class="graduation-suggestions" id="graduationSuggestions"></div>
+                        </div>
+                    </div>
+
+                    <!-- 备忘录 Tab -->
+                    <div class="tab-content" id="tabMemo" style="display:none;">
+                        <!-- 添加备忘 -->
+                        <div class="memo-add-form">
+                            <h3> 添加备忘事项</h3>
+                            <div class="form-group">
+                                <label>事项内容</label>
+                                <input type="text" id="memoContent" placeholder="如：提交期末论文">
+                            </div>
+                            <div class="edu-form-row">
+                                <div class="form-group">
+                                    <label>截止时间</label>
+                                    <input type="datetime-local" id="memoDeadline">
+                                </div>
+                                <div class="form-group">
+                                    <label>优先级</label>
+                                    <select id="memoPriority">
+                                        <option value="高">🔴 高</option>
+                                        <option value="中" selected>🟡 中</option>
+                                        <option value="低">🟢 低</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="edu-form-row">
+                                <div class="form-group">
+                                    <label>分类</label>
+                                    <select id="memoCategory">
+                                        <option value="学习">📚 学习</option>
+                                        <option value="考试">📝 考试</option>
+                                        <option value="活动">🎉 活动</option>
+                                        <option value="生活">🏠 生活</option>
+                                        <option value="其他">📌 其他</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>提醒时间</label>
+                                    <select id="memoReminder">
+                                        <option value="1h">提前 1 小时</option>
+                                        <option value="1d" selected>提前 1 天</option>
+                                        <option value="3d">提前 3 天</option>
+                                        <option value="1w">提前 1 周</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>备注（可选）</label>
+                                <textarea id="memoNote" rows="2" placeholder="补充说明..."></textarea>
+                            </div>
+                            <button class="btn btn-primary" onclick="addMemo()">添加备忘</button>
+                        </div>
+
+                        <!-- 备忘列表 -->
+                        <div class="memo-filters" id="memoFilters">
+                            <button class="memo-filter-btn active" data-filter="all" onclick="filterMemos('all')">全部</button>
+                            <button class="memo-filter-btn" data-filter="pending" onclick="filterMemos('pending')">待完成</button>
+                            <button class="memo-filter-btn" data-filter="completed" onclick="filterMemos('completed')">已完成</button>
+                            <button class="memo-filter-btn" data-filter="urgent" onclick="filterMemos('urgent')">即将到期</button>
+                        </div>
+
+                        <!-- 智能排序按钮 -->
+                        <div class="memo-smart-sort">
+                            <button class="btn btn-primary" onclick="smartSortMemos()"> AI 智能排序</button>
+                            <p class="memo-smart-hint">将所有待完成备忘发送给 AI，生成最优执行顺序建议</p>
+                        </div>
+
+                        <!-- 智能排序结果 -->
+                        <div class="memo-smart-result" id="memoSmartResult" style="display:none;">
+                            <div class="memo-smart-header">
+                                <h3>🤖 AI 执行建议</h3>
+                                <button class="btn btn-outline btn-sm" onclick="closeSmartResult()">关闭</button>
+                            </div>
+                            <div class="memo-smart-loading" id="memoSmartLoading" style="display:none;">
+                                <div class="loading-spinner"></div>
+                                <p>AI 正在分析你的备忘事项，生成最优执行顺序...</p>
+                            </div>
+                            <div class="memo-smart-content" id="memoSmartContent"></div>
+                        </div>
+
+                        <!-- 备忘列表 -->
+                        <div class="memo-list" id="memoList"></div>
+                    </div>
+                </div>
+
+                <div class="plan-generate" id="planGenerate">
+                    <div class="plan-intro">
+                        <div class="plan-intro-icon">📋</div>
+                        <h2>个性化规划生成</h2>
+                        <p>第一步：描述你的目标与现状，AI 会先生成一份「计划大纲」。你确认方向后，再一键生成可勾选的任务清单与打卡表。</p>
+                    </div>
+                    <textarea id="planGoalInput" rows="3" placeholder="例如：我要在 3 个月内备考考研数学，每天可学习 3 小时，目标 120 分以上"></textarea>
+                    <button class="btn btn-primary btn-lg" id="planGenerateBtn">生成计划大纲</button>
+                    <div class="plan-status" id="planStatus" style="display:none;"></div>
+                </div>
+
+                <div class="plan-outline" id="planOutline" style="display:none;">
+                    <div class="plan-result-header">
+                        <div>
+                            <h2 id="outlineTitle">计划大纲</h2>
+                            <p class="plan-meta" id="outlineMeta">第二步：确认大纲方向是否符合预期</p>
+                        </div>
+                        <button class="btn btn-outline btn-sm" id="outlineBackBtn">修改目标</button>
+                    </div>
+                    <div class="plan-card">
+                        <div class="outline-body" id="outlineBody"></div>
+                    </div>
+                    <div class="outline-actions">
+                        <button class="btn btn-outline" id="outlineRegenBtn">重新生成大纲</button>
+                        <button class="btn btn-primary btn-lg" id="outlineConfirmBtn">采用此大纲，生成打卡计划</button>
+                    </div>
+                    <div class="plan-status" id="outlineStatus" style="display:none;"></div>
+                </div>
+
+                <div class="plan-result" id="planResult" style="display:none;">
+                    <div class="plan-result-header">
+                        <div>
+                            <h2 id="planTitle"></h2>
+                            <p class="plan-meta" id="planMeta"></p>
+                        </div>
+                        <button class="btn btn-outline btn-sm" id="planResetBtn">重新生成</button>
+                    </div>
+
+                    <div class="plan-card plan-checkin-card">
+                        <div class="checkin-header">
+                            <div class="checkin-date">
+                                <span class="date-icon">📅</span>
+                                <span id="currentDate">加载中...</span>
+                            </div>
+                            <div class="checkin-summary">
+                                <div class="checkin-stat">
+                                    <span class="checkin-num" id="streakCount">0</span>
+                                    <small>连续打卡(天)</small>
+                                </div>
+                                <div class="checkin-stat">
+                                    <span class="checkin-num" id="checkinTotal">0</span>
+                                    <small>累计打卡(次)</small>
+                                </div>
+                                <button class="btn btn-primary" id="checkInBtn">今日打卡</button>
+                            </div>
+                        </div>
+                        <div class="calendar-nav">
+                            <button type="button" class="cal-nav-btn" id="calPrevBtn" title="上一月">‹</button>
+                            <select class="cal-select" id="calYearSelect"></select>
+                            <select class="cal-select" id="calMonthSelect"></select>
+                            <button type="button" class="cal-nav-btn" id="calNextBtn" title="下一月">›</button>
+                            <button type="button" class="btn btn-outline btn-sm" id="calTodayBtn">本月</button>
+                        </div>
+                        <div class="calendar-caption" id="calendarCaption">点击任意日期可查看当天记录或补卡</div>
+                        <div class="checkin-weekdays" id="checkinWeekdays"></div>
+                        <div class="checkin-calendar" id="checkinCalendar"></div>
+                    </div>
+
+                    <div class="plan-card plan-tasks-card">
+                        <div class="tasks-header">
+                            <div class="tasks-header-left">
+                                <h3>任务清单</h3>
+                                <div class="task-date-nav">
+                                    <button type="button" class="cal-nav-btn" id="taskDatePrev" title="前一天">‹</button>
+                                    <input type="date" class="task-date-input" id="taskDateInput">
+                                    <button type="button" class="cal-nav-btn" id="taskDateNext" title="后一天">›</button>
+                                    <button type="button" class="btn btn-outline btn-sm" id="taskDateToday">今天</button>
+                                </div>
+                            </div>
+                            <div class="tasks-progress">
+                                <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+                                <span class="progress-text" id="progressText">0/0</span>
+                            </div>
+                        </div>
+                        <ul class="task-list" id="taskList"></ul>
+                        <div class="task-checkin-bar">
+                            <span class="task-checkin-hint" id="checkinHint">勾选已完成的任务，然后点击打卡</span>
+                            <button class="btn btn-primary btn-sm" id="taskCheckinBtn" disabled>打卡</button>
+                        </div>
+                        <div class="task-add">
+                            <select class="cal-select" id="newTaskCategory">
+                                <option value="daily">每日任务</option>
+                                <option value="weekly">每周任务</option>
+                                <option value="monthly">每月任务</option>
+                                <option value="stage">阶段任务</option>
+                                <option value="other">其他任务</option>
+                            </select>
+                            <input type="text" id="newTaskInput" placeholder="手动添加一条任务...">
+                            <button class="btn btn-outline btn-sm" id="addTaskBtn">添加</button>
+                        </div>
+                    </div>
+
+                    <div class="plan-card plan-history-card">
+                        <div class="tasks-header">
+                            <h3>打卡历史</h3>
+                            <span class="progress-text" id="historyCount"></span>
+                        </div>
+                        <div class="checkin-history-list" id="checkinHistoryList"></div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <button class="mobile-fab" id="mobileFab">+</button>
+    <div class="mobile-scenario-menu" id="mobileScenarioMenu">
+        <div class="scenario-item" onclick="selectScenario('学业问答'); toggleMobileMenu()">
+            <div class="scenario-icon">📚</div>
+            <span class="scenario-text">学业问答</span>
+        </div>
+        <div class="scenario-item" onclick="selectScenario('规划生成'); toggleMobileMenu()">
+            <div class="scenario-icon">📋</div>
+            <span class="scenario-text">规划生成</span>
+        </div>
+        <div class="scenario-item" onclick="selectScenario('资源推荐'); toggleMobileMenu()">
+            <div class="scenario-icon">🎯</div>
+            <span class="scenario-text">资源推荐</span>
+        </div>
+        <div class="scenario-item" onclick="selectScenario('心理支持'); toggleMobileMenu()">
+            <div class="scenario-icon">❤️</div>
+            <span class="scenario-text">心理支持</span>
+        </div>
+        <div class="scenario-item" onclick="selectScenario('升学定位'); toggleMobileMenu()">
+            <div class="scenario-icon">🎓</div>
+            <span class="scenario-text">升学定位</span>
+        </div>
+        <div class="scenario-item" onclick="selectScenario('风险预警'); toggleMobileMenu()">
+            <div class="scenario-icon">⚠️</div>
+            <span class="scenario-text">风险预警</span>
+        </div>
+    </div>
+
+    <script src="js/api-config.js?v=15"></script>
+    <script src="js/coze-config.js?v=15"></script>
+    <script src="js/coze-client.js?v=15"></script>
+    <script src="js/auth.js?v=15"></script>
+    <script src="js/profile.js?v=15"></script>
+    <script src="js/plan.js?v=15"></script>
+    <script src="js/script.js?v=15"></script>
+</body>
+</html>

@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智学通 - 你的专属AI学业伙伴</title>
+    <script src="js/theme.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="nav" id="navbar">
+        <div class="container nav-content">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">🎓</div>
+                <span>智学通</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html" class="active">首页</a></li>
+                <li><a href="chat.html">对话</a></li>
+                <li><a href="faq.html">常见问题</a></li>
+                <li><a href="mental-health.html">心理支持</a></li>
+                <li><a href="about.html">关于</a></li>
+            </ul>
+            <div class="burger-menu" id="burgerMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <a href="chat.html" class="btn btn-primary">开始使用</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>你的专属AI学业伙伴<br>懂规划，更懂你</h1>
+            <p>7×24小时在线，从选课到考研，从资源到心理，一站式陪伴你的大学之旅</p>
+            <div class="hero-buttons">
+                <a href="chat.html" class="btn btn-primary btn-lg">立即体验</a>
+                <a href="#features" class="btn btn-secondary btn-lg">了解更多</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="features" id="features">
+        <div class="container">
+            <div class="section-title">
+                <h2>六大核心功能中心</h2>
+                <p>全方位覆盖你的学习需求，让AI成为你的专属学业顾问</p>
+            </div>
+            <div class="features-grid">
+                <div class="card feature-card" onclick="goToChat('学业问答', '帮我解答一下高等数学中关于极限的问题')">
+                    <div class="icon-box icon-box-primary">📚</div>
+                    <h3>学业问答中心</h3>
+                    <p>课程知识点答疑、作业难题解析、考试重点梳理，专业知识随时问</p>
+                    <a href="chat.html" class="try-link" onclick="event.stopPropagation(); goToChat('学业问答', '帮我解答一下高等数学中关于极限的问题')">试试看 →</a>
+                </div>
+                <div class="card feature-card" onclick="goToChat('个性化规划', '帮我制定大学四年的学业规划')">
+                    <div class="icon-box icon-box-secondary">📋</div>
+                    <h3>个性化规划引擎</h3>
+                    <p>基于你的目标和现状，生成专属学习计划，支持任务分类与打卡追踪</p>
+                    <a href="chat.html" class="try-link" onclick="event.stopPropagation(); goToChat('个性化规划', '帮我制定大学四年的学业规划')">试试看 →</a>
+                </div>
+                <div class="card feature-card" onclick="goToChat('资源推荐', '推荐一些适合大一新生的学习资源')">
+                    <div class="icon-box icon-box-accent">🎯</div>
+                    <h3>资源推荐系统</h3>
+                    <p>智能匹配优质课程、书籍、讲座资源，助你高效学习</p>
+                    <a href="chat.html" class="try-link" onclick="event.stopPropagation(); goToChat('资源推荐', '推荐一些适合大一新生的学习资源')">试试看 →</a>
+                </div>
+                <div class="card feature-card" onclick="goToChat('心理支持', '带我做个考前放松练习')">
+                    <div class="icon-box icon-box-success">❤️</div>
+                    <h3>心理成长支持</h3>
+                    <p>情绪疏导、压力管理，支持选择不同角色（小暖/小智/小喵/小静），关注你的身心健康</p>
+                    <a href="chat.html" class="try-link" onclick="event.stopPropagation(); goToChat('心理支持', '带我做个考前放松练习')">试试看 →</a>
+                </div>
+                <div class="card feature-card" onclick="goToChat('升学定位', '帮我评估一下考研的可行性')">
+                    <div class="icon-box icon-box-warning">🎓</div>
+                    <h3>升学定位评估</h3>
+                    <p>考研/就业/出国/考公四大板块可视化分析，精准评估你的优劣势</p>
+                    <a href="chat.html" class="try-link" onclick="event.stopPropagation(); goToChat('升学定位', '帮我评估一下考研的可行性')">试试看 →</a>
+                </div>
+                <div class="card feature-card" onclick="goToChat('学伴小助手', '帮我看看毕业进度')">
+                    <div class="icon-box icon-box-danger">🔔</div>
+                    <h3>学伴小助手</h3>
+                    <p>毕业进度追踪（学分/素拓分/青志时长）、备忘录管理、智能到期提醒</p>
+                    <a href="chat.html" class="try-link" onclick="event.stopPropagation(); goToChat('学伴小助手', '帮我看看毕业进度')">试试看 →</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="scenarios">
+        <div class="container">
+            <div class="section-title">
+                <h2>场景化快捷入口</h2>
+                <p>无需思考，点击即可开启对话，解决你的燃眉之急</p>
+            </div>
+            <div class="scenarios-scroll">
+                <div class="scenario-card" onclick="sendToChat('我想考研，怎么准备？', 'education')">
+                    <h4>🎯 我想考研，怎么准备？</h4>
+                    <p>从择校到备考计划，全程指导你的考研之路</p>
+                </div>
+                <div class="scenario-card" onclick="sendToChat('这学期绩点危险，帮我抢救一下', 'risk')">
+                    <h4>⚠️ 这学期绩点危险，帮我抢救一下</h4>
+                    <p>分析当前情况，制定紧急提升方案，保住绩点</p>
+                </div>
+                <div class="scenario-card" onclick="sendToChat('最近好焦虑，帮我测测压力', 'mental')">
+                    <h4>❤️ 最近好焦虑，帮我测测压力</h4>
+                    <p>快速压力自评，了解你的心理状态，获得缓解建议</p>
+                </div>
+                <div class="scenario-card" onclick="sendToChat('帮我推荐适合入门的编程学习资源', 'resources')">
+                    <h4>💻 帮我推荐适合入门的编程学习资源</h4>
+                    <p>从零开始学编程，精选优质课程和练习项目</p>
+                </div>
+                <div class="scenario-card" onclick="sendToChat('如何平衡专业课和社团活动？', 'planning')">
+                    <h4>⚖️ 如何平衡专业课和社团活动？</h4>
+                    <p>时间管理技巧，助你学业社团两不误</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="logo">
+                <div class="logo-icon">🎓</div>
+                <span>智学通</span>
+            </div>
+            <div class="footer-links">
+                <a href="index.html">首页</a>
+                <a href="chat.html">对话</a>
+                <a href="faq.html">常见问题</a>
+                <a href="mental-health.html">心理支持</a>
+                <a href="about.html">关于</a>
+            </div>
+            <p>&copy; 2026 智学通. All rights reserved. | 仅供教育用途</p>
+        </div>
+    </footer>
+
+    <script src="js/api-config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智学通 - 个人中心</title>
+    <script src="js/theme.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="nav" id="navbar">
+        <div class="container nav-content">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">🎓</div>
+                <span>智学通</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="chat.html">对话</a></li>
+                <li><a href="faq.html">常见问题</a></li>
+                <li><a href="mental-health.html">心理支持</a></li>
+                <li><a href="about.html">关于</a></li>
+            </ul>
+            <div class="burger-menu" id="burgerMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <main class="profile-page" id="profilePage">
+        <div class="profile-container">
+            <div class="page-header">
+                <h1>个人中心 · 学生画像</h1>
+                <p>完善你的信息并上传学生画像，所有 AI 智能体将共享这些资料，作为个性化回答的知识库。</p>
+            </div>
+
+            <section class="profile-card">
+                <h3>基本信息</h3>
+                <div class="profile-grid">
+                    <div class="form-group">
+                        <label for="pf_name">姓名</label>
+                        <input type="text" id="pf_name" placeholder="你的名字">
+                    </div>
+                    <div class="form-group">
+                        <label for="pf_grade">年级</label>
+                        <input type="text" id="pf_grade" placeholder="如：大三">
+                    </div>
+                    <div class="form-group">
+                        <label for="pf_school">学校</label>
+                        <input type="text" id="pf_school" placeholder="所在学校">
+                    </div>
+                    <div class="form-group">
+                        <label for="pf_major">专业</label>
+                        <input type="text" id="pf_major" placeholder="所学专业">
+                    </div>
+                </div>
+            </section>
+
+            <section class="profile-card">
+                <h3>学业情况</h3>
+                <div class="profile-grid">
+                    <div class="form-group">
+                        <label for="pf_gpa">绩点 / GPA</label>
+                        <input type="text" id="pf_gpa" placeholder="如：3.6 / 4.0">
+                    </div>
+                    <div class="form-group">
+                        <label for="pf_strengths">优势科目</label>
+                        <input type="text" id="pf_strengths" placeholder="如：高数、英语">
+                    </div>
+                    <div class="form-group">
+                        <label for="pf_weaknesses">薄弱科目</label>
+                        <input type="text" id="pf_weaknesses" placeholder="如：线性代数">
+                    </div>
+                </div>
+            </section>
+
+            <section class="profile-card">
+                <h3>目标方向</h3>
+                <div class="profile-grid">
+                    <div class="form-group">
+                        <label for="pf_direction">发展方向</label>
+                        <input type="text" id="pf_direction" placeholder="如：考研 / 保研 / 就业 / 留学">
+                    </div>
+                    <div class="form-group">
+                        <label for="pf_targetSchool">目标院校 / 岗位</label>
+                        <input type="text" id="pf_targetSchool" placeholder="如：XX大学计算机 / 后端工程师">
+                    </div>
+                </div>
+            </section>
+
+            <section class="profile-card">
+                <h3>其他信息</h3>
+                <div class="form-group">
+                    <label for="pf_interests">兴趣爱好</label>
+                    <input type="text" id="pf_interests" placeholder="如：篮球、编程、阅读">
+                </div>
+                <div class="form-group">
+                    <label for="pf_personality">性格</label>
+                    <input type="text" id="pf_personality" placeholder="如：内向、专注">
+                </div>
+                <div class="form-group">
+                    <label for="pf_habits">学习习惯</label>
+                    <input type="text" id="pf_habits" placeholder="如：习惯晚上学习、容易拖延">
+                </div>
+                <div class="form-group">
+                    <label for="pf_notes">备注</label>
+                    <textarea id="pf_notes" rows="3" placeholder="其他想让 AI 了解的情况"></textarea>
+                </div>
+                <button class="btn btn-primary btn-lg" id="saveProfileBtn">保存信息</button>
+                <div class="profile-status" id="saveStatus" style="display:none;"></div>
+            </section>
+
+            <section class="profile-card">
+                <h3>上传学生画像</h3>
+                <p class="profile-sub">支持照片或 HTML 文件二选一。</p>
+                <div class="portrait-kind">
+                    <label class="radio-pill">
+                        <input type="radio" name="portraitKind" value="photo" checked> 照片格式
+                    </label>
+                    <label class="radio-pill">
+                        <input type="radio" name="portraitKind" value="html"> 文档格式 (HTML / 文本)
+                    </label>
+                </div>
+                <p class="portrait-hint" id="portraitHint"></p>
+                <div class="portrait-upload">
+                    <input type="file" id="portraitFile" accept="image/*">
+                    <button class="btn btn-outline" id="uploadPortraitBtn">上传画像</button>
+                </div>
+                <div class="profile-status" id="portraitStatus" style="display:none;"></div>
+                <div class="portrait-preview" id="portraitPreview"></div>
+            </section>
+
+            <section class="profile-card">
+                <h3>AI 共享画像文件</h3>
+                <p class="profile-sub">以下内容会合并成「一个文件」，对话时随消息同时发给 6 个智能体作为知识背景。</p>
+                <pre class="profile-file" id="profileFilePreview">加载中...</pre>
+                <button class="btn btn-outline btn-sm" id="refreshFileBtn">刷新预览</button>
+            </section>
+        </div>
+    </main>
+
+    <script src="js/api-config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/profile.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>

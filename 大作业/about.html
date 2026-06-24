@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>智学通 - 关于</title>
+    <script src="js/theme.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <nav class="nav" id="navbar">
+        <div class="container nav-content">
+            <a href="index.html" class="logo">
+                <div class="logo-icon">🎓</div>
+                <span>智学通</span>
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">首页</a></li>
+                <li><a href="chat.html">对话</a></li>
+                <li><a href="faq.html">常见问题</a></li>
+                <li><a href="mental-health.html">心理支持</a></li>
+                <li><a href="about.html" class="active">关于</a></li>
+            </ul>
+            <div class="burger-menu" id="burgerMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <section class="about-page">
+        <div class="container about-container">
+            <div class="page-header">
+                <h1>关于智学通</h1>
+                <p>了解我们的项目背景、团队和愿景</p>
+            </div>
+
+            <div class="info-card">
+                <h3>🎯 项目背景</h3>
+                <p>智学通诞生于一个简单的想法：让每一位大学生都能拥有一个懂自己的 AI 学业伙伴。在当今信息爆炸的时代，学生面临着课程学习、升学规划、心理压力、毕业要求等多重挑战，而传统的教务系统功能分散、缺乏个性化服务。</p>
+                <p>本项目基于字节跳动 Coze（扣子）平台，构建了一个集成六大 AI 智能体的一站式学业服务平台，旨在探索 AI 技术在教育领域的实际应用，为大学生提供智能、贴心、全天候的学习支持。</p>
+            </div>
+
+            <div class="info-card">
+                <h3>💡 核心愿景</h3>
+                <p>我们致力于成为大学生最信赖的AI学业伙伴，通过以下方式实现这一愿景：</p>
+                <ul>
+                    <li><strong>智能陪伴</strong>：7×24 小时在线，随时解答学习疑问、缓解心理压力</li>
+                    <li><strong>个性化服务</strong>：基于学生画像（专业、GPA、发展方向等）提供定制化建议</li>
+                    <li><strong>全方位支持</strong>：覆盖学业问答、学习规划、资源推荐、心理支持、升学定位、毕业追踪六大维度</li>
+                    <li><strong>安全可信</strong>：心理支持模块设有危机识别机制，遇到紧急情况引导联系专业机构</li>
+                </ul>
+            </div>
+
+            <div class="info-card">
+                <h3>👥 团队成员</h3>
+                <div class="team-section">
+                    <div class="team-member">
+                        <div class="team-avatar">叶</div>
+                        <h4>叶笑彰</h4>
+                        <p>项目负责人 / 前端开发 / 智能体设计</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-card">
+                <h3>🛠️ 技术架构</h3>
+                <p>智学通采用轻量化的技术方案，兼顾功能完整性与部署便捷性：</p>
+                <ul>
+                    <li><strong>前端技术</strong>：原生 HTML5 + CSS3 + JavaScript（ES6+），无框架依赖，响应式设计，支持亮色/暗色主题切换</li>
+                    <li><strong>AI 平台</strong>：集成 Coze（扣子）智能体平台，6 个独立 Bot 各司其职，通过 v3/chat API 非流式调用</li>
+                    <li><strong>数据存储</strong>：浏览器 localStorage 持久化用户数据（画像、对话历史、规划、备忘录），零数据库依赖</li>
+                    <li><strong>通信方式</strong>：前端直连 Coze API，预留 Express 代理模式可随时切换</li>
+                    <li><strong>部署方式</strong>：支持纯静态部署（GitHub Pages / Vercel）或本地 Node.js 服务运行</li>
+                </ul>
+            </div>
+
+            <div class="info-card">
+                <h3>📊 功能矩阵</h3>
+                <p>智学通提供六大核心功能模块，全面覆盖大学生的学习需求：</p>
+                <ul>
+                    <li>📚 <strong>学业问答中心</strong>：课程知识答疑、作业难题解析，支持图片/文件上传</li>
+                    <li>📋 <strong>个性化规划引擎</strong>：专属学习计划生成，任务分类（每日/每周/每月），打卡追踪</li>
+                    <li>🎯 <strong>资源推荐系统</strong>：优质课程、书籍、学习工具智能推荐</li>
+                    <li>❤️ <strong>心理成长支持</strong>：情绪疏导、压力管理，支持角色选择（小暖/小智/小喵/小静）</li>
+                    <li>🎓 <strong>升学定位评估</strong>：考研/就业/出国/考公四大路径可视化分析</li>
+                    <li>🔔 <strong>学伴小助手</strong>：毕业进度追踪（学分/素拓分/青志时长）、备忘录管理、智能提醒</li>
+                </ul>
+            </div>
+
+            <div class="info-card">
+                <h3>📝 项目说明</h3>
+                <p>智学通是《人工智能综合实践》课程的大作业项目，由学生团队独立完成设计与开发。</p>
+                <p>项目基于 Coze 平台构建 AI 智能体，前端采用原生 Web 技术开发，所有代码与配置均开源可查。</p>
+                <ul>
+                    <li><strong>课程名称</strong>：人工智能综合实践</li>
+                    <li><strong>选题方向</strong>：基于 Coze 平台的智能教学管理辅助服务平台设计与实现</li>
+                    <li><strong>开发周期</strong>：2026 年春季学期</li>
+                </ul>
+            </div>
+
+            <div class="info-card">
+                <h3>📅 更新日志</h3>
+                <ul>
+                    <li><strong>v1.0 (2026年6月)</strong>：首次发布，包含六大核心功能模块</li>
+                    <li><strong>v1.1</strong>：新增心理支持角色选择（小暖/小智/小喵/小静 + 自定义）</li>
+                    <li><strong>v1.2</strong>：新增升学定位四大板块可视化评估</li>
+                    <li><strong>v1.3</strong>：新增学伴小助手（毕业进度追踪 + 备忘录 + 智能提醒）</li>
+                    <li><strong>v1.4</strong>：优化规划生成流程，支持任务分类与打卡日历</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container footer-content">
+            <div class="logo">
+                <div class="logo-icon">🎓</div>
+                <span>智学通</span>
+            </div>
+            <div class="footer-links">
+                <a href="index.html">首页</a>
+                <a href="chat.html">对话</a>
+                <a href="faq.html">常见问题</a>
+                <a href="mental-health.html">心理支持</a>
+                <a href="about.html">关于</a>
+            </div>
+            <p>&copy; 2026 智学通. All rights reserved. | 仅供教育用途</p>
+        </div>
+    </footer>
+
+    <script src="js/api-config.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
